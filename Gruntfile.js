@@ -13,12 +13,15 @@ module.exports = function ( grunt ) {
                 //'tunnel-identifier': 'my-tunnel',
                 desiredCapabilities: 
                 {
-                    browserName: 'chrome',
-                    version: '30',
-                    platform: 'XP'
+                    browserName: 'iehta',
+                    version: '9',
+                    platform: 'Windows 7',
+                    tags: ['IE','9'],
+                    name: process.env.TRAVIS_JOB_NUMBER ||'my test'
+                    //'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER || 'test'
                 }
             },
-            links: {
+            chrome: {
                 tests: ['tests/mainPage/links/*.js']
             }
         },
@@ -28,7 +31,7 @@ module.exports = function ( grunt ) {
 
     grunt.registerTask('menu links',  function () {
         //execute some tests
-        grunt.task.run(['webdriver:links'], function() {
+        grunt.task.run(['webdriver:chrome'], function() {
             localserver.kill('SIGTERM');
         });
 
