@@ -3,8 +3,6 @@ module.exports = function ( grunt ) {
     /** Load Grunt Tasks */
     // grunt.loadNpmTasks('grunt-mocha-webdriver');
     grunt.loadNpmTasks('grunt-webdriver');
-
-    
     var taskConfig = {
         webdriver: {
             options: {
