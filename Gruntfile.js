@@ -53,13 +53,13 @@ module.exports = function ( grunt ) {
         });
     });
     
-    // if (process.env.TRAVIS_BUILD_ID){
-    //     grunt.registerTask('default', 'SauceLabs');
-    // } else {
-    //     grunt.registerTask('default', 'PhantomJS');
-    // }
+    if (process.env.TRAVIS_BUILD_ID){
+        grunt.registerTask('default', 'SauceLabs');
+    } else {
+        grunt.registerTask('default', 'PhantomJS');
+    }
     // grunt.registerTask('default', 'PhantomJS');
-    grunt.registerTask('default', 'SauceLabs');
+    // grunt.registerTask('default', 'SauceLabs');
 
    
 };
