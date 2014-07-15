@@ -1,86 +1,65 @@
 module.exports = function ( grunt ) {
-
+    var _ = require('lodash');
+    var browsers = require('./browsers');
     /** Load Grunt Tasks */
     // grunt.loadNpmTasks('grunt-mocha-webdriver');
     grunt.loadNpmTasks('grunt-webdriver');
+
     var taskConfig = {
         webdriver: {
             options: {
-                host: 'ondemand.saucelabs.com',
-                port: 80,
+
                 user: "akalininv",
                 key: "899a7290-a8ec-4df9-9104-e32160e2042f",
                 //'tunnel-identifier': 'my-tunnel',
                 updateSauceJob: true,
-                logLevel: 'verbose',
+                // logLevel: 'verbose',
                 includeStackTrace: true,
-                
-                
             },
-            iehta9: {
-                tests: ['tests/mainPage/links/*.js'],
-                options:{
-                    desiredCapabilities: {
-                        browserName: 'iehta',
-                        version: '9',
-                        platform: 'Windows 7',
-                        tags: ['IE','9'],
-                        name: process.env.TRAVIS_JOB_NUMBER?
-                            'Fame500, TRAVIS_JOB_NUMBER: ' + process.env.TRAVIS_JOB_NUMBER +
-                            'TRAVIS_JOB_ID: ' + process.env.TRAVIS_JOB_ID + 
-                            'TRAVIS_BUILD_ID: ' + process.env.TRAVIS_BUILD_ID + 
-                            'TRAVIS_COMMI: ' + process.env.TRAVIS_COMMIT :
-                            'Fame500 local tests'
-                        //'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER || 'test'
+            
+            phantomjs:{
+                options: {
+                    // logLevel: 'verbose',
+                    desiredCapabilities: { 
+                        browserName: 'phantomjs'
                     }
-                }
-                
+                },
+                tests: ['tests/mainPage/links/*.js'], 
             },
-            iehta10: {
-                tests: ['tests/mainPage/links/*.js'],
-                options:{
-                    desiredCapabilities: {
-                        browserName: 'iehta',
-                        version: '10',
-                        platform: 'Windows 7',
-                        tags: ['IE','10','Windows 7'],
-                        name: 'Fame500, TRAVIS_JOB_NUMBER: ' + process.env.TRAVIS_JOB_NUMBER ||'Fame500 tests'
-                        //'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER || 'test'
-                    }
-                }
-            },
-            iehta11: {
-                tests: ['tests/mainPage/links/*.js'],
-                options:{
-                    desiredCapabilities: {
-                        browserName: 'iehta',
-                        version: '11',
-                        platform: 'Windows 7',
-                        tags: ['IE','11','Windows 7'],
-                        name: 'Fame500, TRAVIS_JOB_NUMBER: ' + process.env.TRAVIS_JOB_NUMBER ||'Fame500 tests'
-                        //'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER || 'test'
-                    }
-                }
-            }
-        },
+        }
+
     };
+
+    grunt_run = []
+    _(browsers).each(function(browser, key) {
+        taskConfig.webdriver[key] = browser;
+        grunt_run.push('webdriver:' + key);
+    });
 
     grunt.initConfig( grunt.util._.extend( taskConfig ) );
 
-    grunt.registerTask('iehta9',  function () {
-        //execute some tests
-        grunt.task.run(['webdriver:iehta9'], function() {
-            //localserver.kill('SIGTERM');
+    grunt.registerTask('SauceLabs',  function () {
+        //execute tests
+        grunt.task.run(grunt_run, function() {
+            localserver.kill('SIGTERM');
         });
-        grunt.task.run(['webdriver:iehta10'], function() {
-            //localserver.kill('SIGTERM');
-        });
-
-        grunt.task.run(['webdriver:iehta11'], function() {
-            //localserver.kill('SIGTERM');
-        });
-
     });
+    // grunt.registerTask('default', 'SauceLabs');
 
-    grunt.registerTask('default', 'iehta9');
+    grunt.registerTask('PhantomJS',  function () {
+        //execute tests
+        grunt.task.run(['webdriver:phantomjs'], function() {
+            localserver.kill('SIGTERM');
+        });
+    });
+    
+    // if (process.env.TRAVIS_BUILD_ID){
+    //     grunt.registerTask('default', 'SauceLabs');
+    // } else {
+    //     grunt.registerTask('default', 'PhantomJS');
+    // }
+    // grunt.registerTask('default', 'PhantomJS');
+    grunt.registerTask('default', 'SauceLabs');
+
+   
 };
