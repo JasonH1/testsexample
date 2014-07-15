@@ -25,7 +25,12 @@ module.exports = function ( grunt ) {
                         version: '9',
                         platform: 'Windows 7',
                         tags: ['IE','9'],
-                        name: 'Fame500, TRAVIS_JOB_NUMBER: ' + process.env.TRAVIS_JOB_NUMBER ||'Fame500 tests'
+                        name: process.env.TRAVIS_JOB_NUMBER?
+                            'Fame500, TRAVIS_JOB_NUMBER: ' + process.env.TRAVIS_JOB_NUMBER +
+                            'TRAVIS_JOB_ID: ' + process.env.TRAVIS_JOB_ID + 
+                            'TRAVIS_BUILD_ID: ' + process.env.TRAVIS_BUILD_ID + 
+                            'TRAVIS_COMMI: ' + process.env.TRAVIS_COMMIT :
+                            'Fame500 local tests'
                         //'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER || 'test'
                     }
                 }
@@ -65,10 +70,14 @@ module.exports = function ( grunt ) {
     grunt.registerTask('iehta9',  function () {
         //execute some tests
         grunt.task.run(['webdriver:iehta9'], function() {
-            localserver.kill('SIGTERM');
+            //localserver.kill('SIGTERM');
         });
         grunt.task.run(['webdriver:iehta10'], function() {
-            localserver.kill('SIGTERM');
+            //localserver.kill('SIGTERM');
+        });
+
+        grunt.task.run(['webdriver:iehta11'], function() {
+            //localserver.kill('SIGTERM');
         });
 
     });
