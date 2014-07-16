@@ -4,6 +4,7 @@ var all_tests = ['tests/mainPage/links/*.js'];
 var TRAVIS_END_DATA = 'Fame500, commit:' + process.env.TRAVIS_COMMIT ;
 
 module.exports = {
+    
 	iehta9: {
         tests: all_tests,
         options:{

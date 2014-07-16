@@ -3,4 +3,5 @@ node_js:
 before_script:
 - npm install
 script:
-- grunt
+- grunt phantom
+- grunt sauce
