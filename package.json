@@ -15,6 +15,7 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-mocha-webdriver": "latest",
+    "chai-as-promised": "latest",
     "lodash": "latest",
     "chai": "latest"
   }

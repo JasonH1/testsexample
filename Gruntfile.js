@@ -41,7 +41,8 @@ module.exports = function ( grunt ) {
         mochaWebdriver:{
             options: {
                 timeout: 1000 * 60 * 3,
-                reporter: 'spec'
+                reporter: 'spec',
+                usePromises: true
             },
             phantom: {
                 src: ['tests/**/*.js'],
@@ -73,14 +74,30 @@ module.exports = function ( grunt ) {
                         {browserName: 'firefox', platform: 'Windows 7', version: ''}
                     ]
                 }
-            }
+            },
+
+            selenium: {
+                src: ['tests/**/*.js'],
+                options: {
+                    testName: 'selenium test',
+                    concurrency: 2,
+                    hostname: '127.0.0.1',
+                    port:   '4444',
+                    autoInstall: true,
+                    browsers: [
+                        {browserName: 'firefox'},
+                        {browserName: 'chrome'}
+                    ]
+                }
+            },
         }
     };
 
 
     grunt.initConfig( grunt.util._.extend( taskConfig ) );
-    grunt.registerTask('default',[]);
+    grunt.registerTask('default',['mochaWebdriver:phantom']);
     grunt.registerTask('phantom', ['mochaWebdriver:phantom']);
     grunt.registerTask('sauce', [ 'mochaWebdriver:sauce']);
+    grunt.registerTask('selenium', [ 'mochaWebdriver:selenium']);
 
 };

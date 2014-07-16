@@ -7,10 +7,14 @@ To get started install all of the dependencies:
 
 Running tests
 -------
-PhantomJS browser:
+PhantomJS browser (default grunt task):
 
     grunt phantom
 
 Run tests with SauceLabs:
 
-    grunt sauce
+    grunt sauce (Internet explorer 9,10,11. Chrome, Firefox)
+
+Run tests with selenium (local):
+
+    grunt selenium (Chrome, Firefox)
