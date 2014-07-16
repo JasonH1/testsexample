@@ -53,7 +53,7 @@ module.exports = function ( grunt ) {
                     browsers: [
                         // {browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
                         // {browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
-                        {browserName: 'chrome', platform: 'Windows 7', version: ''}
+                        // {browserName: 'chrome', platform: 'Windows 7', version: ''}
                     ]
                 }
             },
@@ -63,7 +63,7 @@ module.exports = function ( grunt ) {
                     username: "akalininv",
                     key: "899a7290-a8ec-4df9-9104-e32160e2042f",
                     testName: process.env.TRAVIS_BUILD_ID?TRAVIS_END_DATA:'Fame500 local tests',
-                    concurrency: 2,
+                    concurrency: 5,
                     testTags: [''],
                     build: process.env.TRAVIS_BUILD_NUMBER || 'local',
                     browsers: [
@@ -71,7 +71,7 @@ module.exports = function ( grunt ) {
                         {browserName: 'internet explorer', platform: 'Windows 7', version: '10'},
                         {browserName: 'internet explorer', platform: 'Windows 7', version: '11'},
                         {browserName: 'chrome', platform: 'Windows 7', version: ''},
-                        {browserName: 'firefox', platform: 'Windows 7', version: ''}
+                        {browserName: 'firefox', platform: 'Windows 7', version: '30'}
                     ]
                 }
             },
