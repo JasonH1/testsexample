@@ -4,7 +4,7 @@ module.exports = function ( grunt ) {
     /** Load Grunt Tasks */
     grunt.loadNpmTasks('grunt-mocha-webdriver');
     // grunt.loadNpmTasks('grunt-webdriver');
-
+    var TRAVIS_END_DATA = 'Fame500, commit:' + process.env.TRAVIS_COMMIT ;
     var taskConfig = {
         // webdriver: {
         //     options: {
@@ -63,12 +63,14 @@ module.exports = function ( grunt ) {
                     key: "899a7290-a8ec-4df9-9104-e32160e2042f",
                     testName: process.env.TRAVIS_BUILD_ID?TRAVIS_END_DATA:'Fame500 local tests',
                     concurrency: 2,
-                    testTags: ['mochaWebDriver'],
+                    testTags: [''],
                     build: process.env.TRAVIS_BUILD_NUMBER || 'local',
                     browsers: [
-                        // {browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
-                        // {browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
-                        {browserName: 'chrome', platform: 'Windows 7', version: ''}
+                        {browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
+                        {browserName: 'internet explorer', platform: 'Windows 7', version: '10'},
+                        {browserName: 'internet explorer', platform: 'Windows 7', version: '11'},
+                        {browserName: 'chrome', platform: 'Windows 7', version: ''},
+                        {browserName: 'firefox', platform: 'Windows 7', version: ''}
                     ]
                 }
             }
@@ -77,7 +79,7 @@ module.exports = function ( grunt ) {
 
 
     grunt.initConfig( grunt.util._.extend( taskConfig ) );
-    grunt.registerTask('default');
+    grunt.registerTask('default',[]);
     grunt.registerTask('phantom', ['mochaWebdriver:phantom']);
     grunt.registerTask('sauce', [ 'mochaWebdriver:sauce']);
 
