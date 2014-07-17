@@ -17,6 +17,7 @@
     "grunt-mocha-webdriver": "latest",
     "chai-as-promised": "latest",
     "lodash": "latest",
-    "chai": "latest"
+    "chai": "latest",
+    "wd": "latest"
   }
 }

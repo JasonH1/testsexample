@@ -85,7 +85,7 @@ module.exports = function ( grunt ) {
                     port:   '4444',
                     autoInstall: true,
                     browsers: [
-                        //{browserName: 'firefox'},
+                        {browserName: 'firefox'},
                         {browserName: 'chrome'}
                     ]
                 }
